@@ -1,0 +1,26 @@
+﻿@model StackOverflowClone.Models.Answer
+
+<h3>Add Answer</h3>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="QuestionId" value="@ViewBag.QuestionId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Body" class="form-label"></label>
+        <textarea asp-for="Body" class="form-control"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PostedBy" class="form-label"></label>
+        <input asp-for="PostedBy" class="form-control" />
+        <span asp-validation-for="PostedBy" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-controller="Questions" asp-action="Details" asp-route-id="@ViewBag.QuestionId" class="btn btn-secondary">Back</a>
+</form>

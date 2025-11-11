@@ -1,0 +1,46 @@
+﻿@model StackOverflowClone.Models.Question
+@{
+    ViewData["Title"] = "Question Details";
+}
+
+<h2>@Model.Title</h2>
+<p>@Model.Body</p>
+<p class="text-muted">Posted by @Model.PostedBy on @Model.PostedDate.ToShortDateString()</p>
+
+<hr />
+
+<h4>Answers</h4>
+@if (Model.Answers.Any())
+{
+    foreach (var a in Model.Answers)
+    {
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>@a.Body</p>
+                <small class="text-muted">By @a.PostedBy on @a.PostedDate.ToShortDateString()</small>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No answers yet. Be the first to answer!</p>
+}
+
+<hr />
+
+<h4 class="mt-4">Add Your Answer</h4>
+<form asp-action="AddAnswer" method="post">
+    <input type="hidden" name="questionId" value="@Model.Id" />
+    <div class="mb-3">
+        <label class="form-label">Your Answer</label>
+        <textarea name="body" class="form-control" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Your Name</label>
+        <input name="postedBy" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Submit Answer</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<StackOverflowClone.Models.Question>
+<h2>All Questions</h2>
+<a href="/Questions/Create" class="btn btn-primary mb-3">Ask Question</a>
+
+<div class="row">
+    @foreach (var q in Model)
+    {
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@q.Title</h5>
+                    <p class="card-text">@q.Body.Substring(0, Math.Min(q.Body.Length, 150))...</p>
+                    <p class="text-muted">Posted by @q.PostedBy on @q.PostedDate.ToShortDateString()</p>
+                    <a href="/Questions/Details/@q.Id" class="btn btn-sm btn-info">View Details</a>
+                    <form method="post" asp-action="Delete" asp-route-id="@q.Id" style="display:inline">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

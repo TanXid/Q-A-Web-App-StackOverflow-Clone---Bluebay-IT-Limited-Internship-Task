@@ -1,0 +1,15 @@
+﻿@model StackOverflowClone.Models.Answer
+<h2>Add Answer</h2>
+
+<form asp-controller="Answers" asp-action="Create" method="post">
+    <input type="hidden" name="QuestionId" value="@Model.Id" />
+    <div class="mb-3">
+        <label class="form-label">Your Answer</label>
+        <textarea name="Body" class="form-control" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Posted By</label>
+        <input name="PostedBy" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Answer</button>
+</form>
